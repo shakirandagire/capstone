@@ -1,0 +1,91 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI with Scandium
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Run Scandium Test
+        run: |
+          response=$(curl -X POST -H "Content-Type: application/json" -H "x-api-token: # This is a basic workflow to help you get started with Actions
+
+name: CI with Scandium
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      - name: Run Scandium Test
+        run: |
+          response=$(curl -X POST -H "Content-Type: application/json" -H "x-api-token: uoSYtrF7sL6nts8bnBr2S8ERpKvr1J" -d '{"project_id": "9d62ba7b-e22e-44d8-8cad-381ab07959dd", "suite_id": "9d672732-df43-453c-9aca-c33752521ac3","browser": "chrome","screenshot": true,"strategy": "await","variables": {},"retry": 0}' "https://scr.getscandium.com/suites/execute")
+          status=$(echo "$response" | jq -r .data.result.status)
+          message=$(echo "$response" | jq -r .message)
+
+          if [ "$status" = "success" ]; then
+            echo "Test ran successfully. Status: $status"
+          else
+            echo "Test ran with failure. Status: $status"
+            exit 1
+          fi
+        env:
+          CURL_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt # Set the CA certificates bundle path
+
+      # - name: Install jq
+      #   run: |
+      #     sudo apt-get update -y
+      #     sudo apt-get install -y jq" -d '{"project_id": "", "test_id": " ","browser": "chrome","screenshot": true,"strategy": "await","variables": {},"retry": 0}' "https://scr.getscandium.com/tests/execute")
+          status=$(echo "$response" | jq -r .data.result.status)
+          message=$(echo "$response" | jq -r .message)
+
+          if [ "$status" = "success" ]; then
+            echo "Test ran successfully. Status: $status"
+          else
+            echo "Test ran with failure. Status: $status"
+            exit 1
+          fi
+        env:
+          CURL_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt # Set the CA certificates bundle path
+
+      # - name: Install jq
+      #   run: |
+      #     sudo apt-get update -y
+      #     sudo apt-get install -y jq
